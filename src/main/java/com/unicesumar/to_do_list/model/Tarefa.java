@@ -1,0 +1,11 @@
+/*
+ * 
+ * @LucasLeffel
+ * 
+ */
+
+package com.unicesumar.to_do_list.model;
+
+public class Tarefa {
+    
+}
