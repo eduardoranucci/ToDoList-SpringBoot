@@ -13,9 +13,21 @@ public class Usuario {
     private String senha;
     private String nome;
     
-    // getter id
+    public Usuario() {}
+    
+    public Usuario(int id, String email, String senha, String nome) {
+        this.id = id;
+        this.email = email;
+        this.senha = senha;
+        this.nome = nome;
+    }
+
+    // getter e setter id
     public int getId() {
         return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
     // getter e setter email

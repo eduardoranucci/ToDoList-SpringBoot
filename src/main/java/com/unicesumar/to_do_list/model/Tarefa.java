@@ -15,6 +15,18 @@ public class Tarefa {
     private String dataCriacao;
     private String dataConclusao;
     
+    public Tarefa() {}
+
+    public Tarefa(int id, int usuarioId, String descricao, boolean concluida, String dataCriacao,
+            String dataConclusao) {
+        this.id = id;
+        this.usuarioId = usuarioId;
+        this.descricao = descricao;
+        this.concluida = concluida;
+        this.dataCriacao = dataCriacao;
+        this.dataConclusao = dataConclusao;
+    }
+
     public int getId() {
         return id;
     }
