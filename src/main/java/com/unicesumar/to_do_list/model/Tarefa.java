@@ -6,19 +6,21 @@
 
 package com.unicesumar.to_do_list.model;
 
+import java.time.LocalDate;
+
 public class Tarefa {
 
     private int id;
     private int usuarioId;
     private String descricao;
     private boolean concluida;
-    private String dataCriacao;
-    private String dataConclusao;
-    
+    private LocalDate dataCriacao;
+    private LocalDate dataConclusao;
+
     public Tarefa() {}
 
-    public Tarefa(int id, int usuarioId, String descricao, boolean concluida, String dataCriacao,
-            String dataConclusao) {
+    public Tarefa(int id, int usuarioId, String descricao, boolean concluida, LocalDate dataCriacao,
+            LocalDate dataConclusao) {
         this.id = id;
         this.usuarioId = usuarioId;
         this.descricao = descricao;
@@ -30,9 +32,17 @@ public class Tarefa {
     public int getId() {
         return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
     public int getUsuarioId() {
         return usuarioId;
+    }
+
+    public void setUsuarioId(int id) {
+        this.usuarioId = id;
     }
 
     public String getDescricao() {
@@ -51,19 +61,19 @@ public class Tarefa {
         this.concluida = concluida;
     }
     
-    public String getDataCriacao() {
+    public LocalDate getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(String dataCriacao) {
+    public void setDataCriacao(LocalDate dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
     
-    public String getDataConclusao() {
+    public LocalDate getDataConclusao() {
         return dataConclusao;
     }
 
-    public void setDataConclusao(String dataConclusao) {
+    public void setDataConclusao(LocalDate dataConclusao) {
         this.dataConclusao = dataConclusao;
     }
 }

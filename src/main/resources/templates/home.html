@@ -22,7 +22,7 @@
         </div>
 
         <!-- Formulário para nova tarefa -->
-        <form action="/validarTarefa" method="post" class="mb-4 row g-3">
+        <form action="/adicionarTarefa" method="post" class="mb-4 row g-3">
             <div class="col-auto">
                 <label for="descricao" class="visually-hidden">Descrição</label>
                 <input type="text" name="descricao" id="descricao" class="form-control" placeholder="Nova tarefa">
@@ -48,9 +48,9 @@
                 <tr th:each="tarefa : ${tarefas}">
                     <td th:text="${tarefa.id}"></td>
                     <td th:text="${tarefa.descricao}"></td>
-                    <td th:text="${#dates.format(tarefa.dataCriacao, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${#temporals.format(tarefa.dataCriacao, 'dd/MM/yyyy')}"></td>
                     <td
-                        th:text="${tarefa.dataConclusao != null ? #dates.format(tarefa.dataConclusao, 'dd/MM/yyyy') : '-'}">
+                        th:text="${tarefa.dataConclusao != null ? #temporals.format(tarefa.dataConclusao, 'dd/MM/yyyy') : '-'}">
                     </td>
                     <td>
                         <span th:text="${tarefa.concluida ? 'Sim' : 'Não'}"
