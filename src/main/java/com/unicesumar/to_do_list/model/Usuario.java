@@ -12,6 +12,8 @@ public class Usuario {
     private String email;
     private String senha;
     private String nome;
+    private String cpf;
+    private String perfil;
     
     public Usuario() {}
     
@@ -52,5 +54,21 @@ public class Usuario {
     }
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    // getter e setter cpf
+    public String getCpf() {
+        return cpf;
+    }
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    // getter e setter perfil
+    public String getPerfil() {
+        return perfil;
+    }
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
 }

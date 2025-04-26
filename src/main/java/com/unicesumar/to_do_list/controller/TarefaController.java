@@ -26,8 +26,6 @@ import com.unicesumar.to_do_list.model.Usuario;
 import com.unicesumar.to_do_list.service.TarefaService;
 
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 @Controller
 public class TarefaController {
@@ -44,7 +42,7 @@ public class TarefaController {
         }
         List<Tarefa> tarefas = tarefaService.listarTarefas(usuario.getId());
         model.addAttribute("tarefas", tarefas);
-        model.addAttribute("nomeUsuario", usuario.getNome());
+        model.addAttribute("usuario", usuario);
         return "home";
     }
 

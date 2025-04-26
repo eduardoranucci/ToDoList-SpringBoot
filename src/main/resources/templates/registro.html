@@ -31,6 +31,19 @@
                 <input type="password" name="senha" th:field="*{senha}" id="senha" class="form-control">
             </div>
 
+            <div class="mb-3">
+                <label for="cpf" class="form-label">CPF</label>
+                <input type="number" min="0" minlength="11" name="cpf" th:field="*{cpf}" id="cpf" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="perfil" class="form-label">Perfil</label>
+                <select name="perfil" id="perfil" class="form-select">
+                    <option value="aluno">Aluno</option>
+                    <option value="professor">Professor</option>
+                </select>
+            </div>            
+
             <div class="d-grid mb-3">
                 <button type="submit" class="btn btn-success">Cadastrar</button>
             </div>

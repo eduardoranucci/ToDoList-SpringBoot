@@ -13,8 +13,12 @@
 
     <!-- tarefas.html -->
     <div class="alert alert-primary text-center mt-3" role="alert">
-        Olá, <strong th:text="${nomeUsuario}"></strong>! Bem-vindo(a)!
+        <span th:if="${usuario.perfil == 'aluno'}"
+            th:text="'Olá, Aluno(a) ' + ${usuario.nome} + '! Bem-vindo(a)!'"></span>
+        <span th:if="${usuario.perfil == 'professor'}"
+            th:text="'Olá, Professor(a) ' + ${usuario.nome} + '! Bem-vindo(a)!'"></span>
     </div>
+
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>Lista de Tarefas</h2>

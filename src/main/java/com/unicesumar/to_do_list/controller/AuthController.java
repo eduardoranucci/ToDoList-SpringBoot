@@ -60,11 +60,14 @@ public class AuthController {
         user.setEmail(user.getEmail().trim());
         user.setNome(user.getNome().trim());
         user.setSenha(user.getSenha().trim());
+        user.setCpf(user.getCpf().trim());
+        user.setPerfil(user.getPerfil().trim());
 
         if (user.getEmail() == null || user.getEmail().isEmpty() ||
             user.getNome() == null || user.getNome().isEmpty() ||
-            user.getSenha() == null || user.getSenha().isEmpty()) {
-
+            user.getSenha() == null || user.getSenha().isEmpty() || 
+            user.getPerfil() == null || user.getPerfil().isEmpty()) 
+        {
             modelo.addAttribute("msg", "Preencha todos os campos!");
             modelo.addAttribute("usuario", user);
             return "registro";
