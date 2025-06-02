@@ -9,32 +9,30 @@ package com.unicesumar.to_do_list.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.unicesumar.to_do_list.model.Usuario;;
+import com.unicesumar.to_do_list.model.Usuario;
+import com.unicesumar.to_do_list.repository.UsuarioRepository;;
 
 @Service
 public class AuthService {
     
-    private final List<Usuario> usuarios = new ArrayList<>();
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
-    public boolean adicionarUsuario(Usuario usuario) {
-        usuario.setId(usuarios.size() + 1);
-        usuarios.add(usuario);
-        return true;
+    public void adicionarUsuario(Usuario usuario) {
+        usuarioRepository.save(usuario);
     }
 
     public Usuario autenticarUsuario(String email, String senha) {
-        for (Usuario usuario : usuarios) {
-            if (usuario.getEmail().equalsIgnoreCase(email) && 
-                usuario.getSenha().equalsIgnoreCase(senha)) {
-                return usuario;
-            }
+        Usuario usuario = usuarioRepository.findByEmailAndSenha(email, senha);
+        if (usuario != null) {
+            return usuario;
         }
         return null;
     }
 
     public boolean emailJaCadastrado(String email) {
-        return usuarios.stream()
-            .anyMatch(u -> u.getEmail().equalsIgnoreCase(email));
+        return usuarioRepository.existsByEmail(email);
     }    
 }
