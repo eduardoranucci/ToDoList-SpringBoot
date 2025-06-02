@@ -7,7 +7,6 @@
 package com.unicesumar.to_do_list.service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
