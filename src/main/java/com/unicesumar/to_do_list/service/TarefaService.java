@@ -10,48 +10,38 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.unicesumar.to_do_list.model.Tarefa;
+import com.unicesumar.to_do_list.model.Usuario;
+import com.unicesumar.to_do_list.repository.TarefaRepository;
 
 @Service
 public class TarefaService {
     
-    private final List<Tarefa> tarefas = new ArrayList<>();
+    @Autowired
+    private TarefaRepository tarefaRepository;
 
-    public boolean adicionarTarefa(Tarefa tarefa, int usuarioId){
-        tarefa.setId(tarefas.size() + 1);
-        tarefa.setUsuarioId(usuarioId);
+    public boolean adicionarTarefa(Tarefa tarefa, Long usuarioId){
+        tarefa.setUsuario(new Usuario(usuarioId));
         tarefa.setDataCriacao(LocalDate.now());
-        tarefas.add(tarefa);
+        tarefaRepository.save(tarefa);
         return true;
     }
-    
-    public List<Tarefa> listarTarefas(int id) {
-        List <Tarefa> tarefasUsuario = new ArrayList<>();
-        for (Tarefa tarefa : tarefas) {
-            if (id == tarefa.getUsuarioId()) {
-                tarefasUsuario.add(tarefa);
-            }
-        } 
-        return tarefasUsuario;
+
+    public List<Tarefa> listarTarefas(Long usuarioId) {
+        return tarefaRepository.findByUsuarioId(usuarioId);
     }
-    
+
     public Tarefa buscarTarefa(int id) {
-        for (Tarefa tarefa : tarefas) {
-            if (tarefa.getId() == id) {
-                return tarefa;            
-            }
-        }
-        return null;
+        Tarefa tarefa = tarefaRepository.findById((long) id).orElse(null);
+        return tarefa;
     }
 
     public void concluirTarefa(Tarefa tarefa) {
-        for (int i = 0 ; i < tarefas.size() ; i++) {
-            if (tarefas.get(i).getId() == tarefa.getId()) {
-                tarefas.set(i, tarefa);
-                break;        
-            }
-        }
+        tarefa.setConcluida(true);
+        tarefa.setDataConclusao(LocalDate.now());
+        tarefaRepository.save(tarefa);
     }
 }

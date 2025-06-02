@@ -8,41 +8,53 @@ package com.unicesumar.to_do_list.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+@Entity
 public class Tarefa {
 
-    private int id;
-    private int usuarioId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String descricao;
     private boolean concluida;
     private LocalDate dataCriacao;
     private LocalDate dataConclusao;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
     public Tarefa() {}
 
-    public Tarefa(int id, int usuarioId, String descricao, boolean concluida, LocalDate dataCriacao,
+    public Tarefa(Long id, String descricao, boolean concluida, LocalDate dataCriacao,
             LocalDate dataConclusao) {
         this.id = id;
-        this.usuarioId = usuarioId;
         this.descricao = descricao;
         this.concluida = concluida;
         this.dataCriacao = dataCriacao;
         this.dataConclusao = dataConclusao;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    
-    public int getUsuarioId() {
-        return usuarioId;
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioId(int id) {
-        this.usuarioId = id;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getDescricao() {

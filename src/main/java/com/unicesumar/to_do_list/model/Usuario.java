@@ -41,6 +41,10 @@ public class Usuario {
         this.nome = nome;
     }
 
+    public Usuario(Long id) {
+        this.id = id;
+    }
+
     // getter e setter id
     public Long getId() {
         return id;
