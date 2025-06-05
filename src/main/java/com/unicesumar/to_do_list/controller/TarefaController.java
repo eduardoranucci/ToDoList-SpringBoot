@@ -36,10 +36,7 @@ public class TarefaController {
     @GetMapping("/home")
     public String home(HttpSession session, Model model) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-        if (usuario == null) {
-            model.addAttribute("msg", "Sessão expirou ou usuário deslogado");
-            return "index";
-        }
+        
         List<Tarefa> tarefas = tarefaService.listarTarefas(usuario.getId());
         model.addAttribute("tarefas", tarefas);
         model.addAttribute("usuario", usuario);
@@ -49,10 +46,6 @@ public class TarefaController {
     @PostMapping("/adicionarTarefa")
     public String adicionarTarefa(HttpSession session, @ModelAttribute Tarefa tarefa, Model model) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-        if (usuario == null) {
-            model.addAttribute("msg", "Sessão expirou ou usuário deslogado");
-            return "index";
-        }
 
         tarefaService.adicionarTarefa(tarefa, usuario.getId());
         return "redirect:/home";
@@ -61,10 +54,6 @@ public class TarefaController {
     @PostMapping("/concluirTarefa")
     public String concluirTarefa(@RequestParam("id") int id, HttpSession session, Model model) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-        if (usuario == null) {
-            model.addAttribute("msg", "Sessão expirou ou usuário deslogado");
-            return "index";
-        }
         
         Tarefa tarefa = tarefaService.buscarTarefa(id);
         if (tarefa != null) {
