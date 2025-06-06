@@ -57,7 +57,7 @@ public class TarefaController {
     }
 
     @PostMapping("/concluirTarefa")
-    public String concluirTarefa(@RequestParam("id") int id, Principal principal, Model model) {
+    public String concluirTarefa(@RequestParam("id") Long id, Principal principal, Model model) {
         String email = principal.getName();
         Usuario usuario = usuarioRepository.findByEmail(email);
 
@@ -75,4 +75,17 @@ public class TarefaController {
         return "redirect:/home";
     }
     
+    @PostMapping("/deletarTarefa")
+    public String deletarTarefa(@RequestParam("id") Long id, Principal principal) {
+        String email = principal.getName();
+        Usuario usuario = usuarioRepository.findByEmail(email);
+
+        Tarefa tarefa = tarefaService.buscarTarefa(id);
+        if (tarefa != null && tarefa.getUsuario().getId() == usuario.getId() && !tarefa.isConcluida()) {
+            System.out.println("Entrou no deletarTarefa, id=" + id);
+            tarefaService.deletarTarefa(id);
+        }
+
+        return "redirect:/home";
+    }
 }

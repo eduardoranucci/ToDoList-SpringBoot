@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.unicesumar.to_do_list.model.Tarefa;
 import com.unicesumar.to_do_list.model.Usuario;
@@ -33,8 +34,8 @@ public class TarefaService {
         return tarefaRepository.findByUsuarioId(usuarioId);
     }
 
-    public Tarefa buscarTarefa(int id) {
-        Tarefa tarefa = tarefaRepository.findById((long) id).orElse(null);
+    public Tarefa buscarTarefa(Long id) {
+        Tarefa tarefa = tarefaRepository.findById(id).orElse(null);
         return tarefa;
     }
 
@@ -42,5 +43,17 @@ public class TarefaService {
         tarefa.setConcluida(true);
         tarefa.setDataConclusao(LocalDate.now());
         tarefaRepository.save(tarefa);
+    }
+
+    @Transactional
+    public void deletarTarefa(Long id) {
+        Tarefa tarefa = tarefaRepository.findById(id).orElse(null);
+        if (tarefa != null) {
+            Usuario usuario = tarefa.getUsuario();
+            if (usuario != null) {
+                usuario.listarTarefas().remove(tarefa);
+            }
+            tarefaRepository.deleteById(id);
+        }
     }
 }

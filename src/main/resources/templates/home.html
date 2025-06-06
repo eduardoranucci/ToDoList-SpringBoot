@@ -70,6 +70,11 @@
                             <input type="hidden" name="id" th:value="${tarefa.id}" />
                             <button type="submit" class="btn btn-sm btn-outline-primary">Concluir</button>
                         </form>
+                        <form th:action="@{/deletarTarefa}" method="post" th:if="${!tarefa.concluida}">
+                            <input type="hidden" name="id" th:value="${tarefa.id}" />
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                            <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
+                        </form>
                     </td>
                 </tr>
             </tbody>
