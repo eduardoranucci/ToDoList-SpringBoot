@@ -30,7 +30,6 @@ public class AuthController {
 
     @GetMapping("/")
     public String index() {
-        System.out.println("VASCOOOO");
         return "index";
     }
     

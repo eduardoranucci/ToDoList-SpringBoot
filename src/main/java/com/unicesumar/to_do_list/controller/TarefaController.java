@@ -27,8 +27,6 @@ import com.unicesumar.to_do_list.model.Usuario;
 import com.unicesumar.to_do_list.repository.UsuarioRepository;
 import com.unicesumar.to_do_list.service.TarefaService;
 
-import jakarta.servlet.http.HttpSession;
-
 @Controller
 public class TarefaController {
     
@@ -50,17 +48,19 @@ public class TarefaController {
     }
 
     @PostMapping("/adicionarTarefa")
-    public String adicionarTarefa(HttpSession session, @ModelAttribute Tarefa tarefa, Model model) {
-        Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+    public String adicionarTarefa(Principal principal, @ModelAttribute Tarefa tarefa, Model model) {
+        String email = principal.getName();
+        Usuario usuario = usuarioRepository.findByEmail(email);
 
         tarefaService.adicionarTarefa(tarefa, usuario.getId());
         return "redirect:/home";
     }
 
     @PostMapping("/concluirTarefa")
-    public String concluirTarefa(@RequestParam("id") int id, HttpSession session, Model model) {
-        Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-        
+    public String concluirTarefa(@RequestParam("id") int id, Principal principal, Model model) {
+        String email = principal.getName();
+        Usuario usuario = usuarioRepository.findByEmail(email);
+
         Tarefa tarefa = tarefaService.buscarTarefa(id);
         if (tarefa != null) {
             tarefa.setConcluida(true);
