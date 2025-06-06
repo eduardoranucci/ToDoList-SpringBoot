@@ -9,7 +9,8 @@ package com.unicesumar.to_do_list.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.unicesumar.to_do_list.model.Usuario;
-import com.unicesumar.to_do_list.repository.UsuarioRepository;;
+import com.unicesumar.to_do_list.repository.UsuarioRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 public class AuthService {
@@ -17,7 +18,11 @@ public class AuthService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public void adicionarUsuario(Usuario usuario) {
+        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         usuarioRepository.save(usuario);
     }
 

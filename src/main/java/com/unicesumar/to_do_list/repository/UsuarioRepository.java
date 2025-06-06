@@ -6,7 +6,8 @@ import com.unicesumar.to_do_list.model.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     
-    Usuario findByEmailAndSenha(String login, String senha);
+    Usuario findByEmailAndSenha(String email, String senha);
+    Usuario findByEmail(String email);
     
     Usuario findByNome(String nome);
     boolean existsByEmail(String email);

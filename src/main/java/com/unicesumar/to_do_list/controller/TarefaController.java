@@ -10,6 +10,7 @@
 
 package com.unicesumar.to_do_list.controller;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.unicesumar.to_do_list.model.Tarefa;
 import com.unicesumar.to_do_list.model.Usuario;
+import com.unicesumar.to_do_list.repository.UsuarioRepository;
 import com.unicesumar.to_do_list.service.TarefaService;
 
 import jakarta.servlet.http.HttpSession;
@@ -33,9 +35,13 @@ public class TarefaController {
     @Autowired
     private TarefaService tarefaService;
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
     @GetMapping("/home")
-    public String home(HttpSession session, Model model) {
-        Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+    public String home(Principal principal, Model model) {
+        String email = principal.getName();
+        Usuario usuario = usuarioRepository.findByEmail(email);
         
         List<Tarefa> tarefas = tarefaService.listarTarefas(usuario.getId());
         model.addAttribute("tarefas", tarefas);

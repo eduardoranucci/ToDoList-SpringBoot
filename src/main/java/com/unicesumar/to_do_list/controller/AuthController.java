@@ -30,6 +30,7 @@ public class AuthController {
 
     @GetMapping("/")
     public String index() {
+        System.out.println("VASCOOOO");
         return "index";
     }
     
@@ -63,7 +64,6 @@ public class AuthController {
             modelo.addAttribute("usuario", user);
             return "registro";
         }
-
         authService.adicionarUsuario(user);
         modelo.addAttribute("msgSuccess", "Usuário cadastrado com sucesso!");
         return "index";
