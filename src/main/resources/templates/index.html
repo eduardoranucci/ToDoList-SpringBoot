@@ -35,6 +35,13 @@
             Não tem uma conta? <a href="/registro">Clique aqui para se registrar</a>
         </p>
 
+        <div th:if="${param.error}" class="alert alert-danger text-center" role="alert">
+            <span>Credenciais inválidas. Tente novamente.</span>
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success text-center" role="alert">
+            <span>Logout realizado com sucesso.</span>
+        </div>
+
         <div th:if="${msg}" class="alert alert-danger text-center" role="alert">
             <span th:text="${msg}"></span>
         </div>
